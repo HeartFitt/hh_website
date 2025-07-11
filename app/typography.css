@@ -17,6 +17,8 @@
   --line-height-tight: 1.2;
   --line-height-base: 1.5;
   --line-height-loose: 1.75;
+
+  --leading: -0.56px
 }
 
 body {
@@ -24,5 +26,6 @@ body {
   font-weight: var(--font-weight-regular);
   font-size: var(--font-size-md);
   line-height: var(--line-height-base);
-  color: var(--color-neutral-7);
+  color: var(--color-neutral-100);
+  letter-spacing: var(--leading);
 }

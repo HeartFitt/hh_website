@@ -1,0 +1,44 @@
+.btn {
+    cursor: pointer;
+    font-weight: 400;
+    transition: background-color 0.2s ease;
+    line-height: 100%;
+    border-radius: 0.5rem;
+}
+
+/* Container and Treatment */
+.btnContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    width: fit-content;
+    position: relative;
+}
+
+.btnContainerfullWidth {
+    width: 100%; /* Fill available width when this class is added */
+}
+
+/* Text in button */
+.btn span {
+    padding: 0rem 0.5rem;
+}
+   
+/* Button Sizes */
+.btn-lg {
+    /* border-radius: 0.5rem; */
+    font-size: 1rem;
+    letter-spacing: 98%;
+    padding: 0.875rem 1.125rem;
+}
+       
+/* Button Variants */
+.btn-primary {
+    background: var(--color-neutral-100, #FEFEFE);
+    color: var(--color-neutral-800);
+
+    &:hover {
+        background-color: var(--color-neutral-300, #F0F0F0);
+    }
+}

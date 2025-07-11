@@ -9,6 +9,7 @@ import {
 
 import "./app.css";
 import type { Route } from "./+types/root";
+//fallback for squircle-js 
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },

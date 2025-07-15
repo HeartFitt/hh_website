@@ -29,3 +29,9 @@ body {
   color: var(--color-neutral-100);
   letter-spacing: var(--leading);
 }
+
+h1 {
+  font-size: 64px;
+  line-height: 1.1;
+  font-weight: var(--font-weight-medium);
+}

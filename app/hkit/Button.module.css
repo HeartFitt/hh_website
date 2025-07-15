@@ -42,3 +42,12 @@
         background-color: var(--color-neutral-300, #F0F0F0);
     }
 }
+
+.btn-secondary {
+    background: var(--color-neutral-700, #F5F5F5);
+    color: var(--color-neutral-100);
+
+    &:hover {
+        background-color: var(--color-neutral-400, #E0E0E0);
+    }
+}

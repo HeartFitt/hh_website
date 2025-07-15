@@ -20,7 +20,7 @@ const ProductCard = ({ title, actionButton, icon: Icon, iconColor = "var(--neutr
 
     return (
         // style={{ clipPath: `path('${dimensions}')` }}
-        <div ref={cardRef} className="bg-neutral-800 p-4 rounded-lg flex flex-col w-full gap-4 justify-between h-[500px]">
+        <div ref={cardRef} className="bg-neutral-800 p-4 rounded-lg flex flex-col w-full gap-4 justify-between h-[500px] max-w-[500px] max-h-[400px]">
             <div className="flex flex-col gap-2">
                 <div>
                     {Icon && <Icon size={32} color={iconColor} weight="bold" />}

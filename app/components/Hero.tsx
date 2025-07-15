@@ -43,10 +43,10 @@ const Hero: React.FC = () => {
     return (
         <section>
             {/* Wrapper */}
-            <div className='flex flex-col items-center'>
+            <div className='flex flex-col items-center gap-[8rem]'>
                 {/* Title */}
                 <div className="w-full align-center text-center">
-                    <h1>
+                    <h1 className='title-1'>
                         Gamified,
                         <br />
                         Heart-healthy <br />

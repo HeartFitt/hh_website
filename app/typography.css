@@ -1,37 +1,138 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca&display=swap');
-
-:root {
-  --font-base: 'Lexend Deca', sans-serif;
-
-  --font-weight-regular: 400;
-  --font-weight-medium: 500;
-  --font-weight-bold: 700;
-
-  --font-size-xs: 12px;
-  --font-size-sm: 14px;
-  --font-size-md: 16px;
-  --font-size-lg: 20px;
-  --font-size-xl: 24px;
-  --font-size-2xl: 32px;
-
-  --line-height-tight: 1.2;
-  --line-height-base: 1.5;
-  --line-height-loose: 1.75;
-
-  --leading: -0.56px
-}
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@400&display=swap');
 
 body {
-  font-family: var(--font-base);
-  font-weight: var(--font-weight-regular);
-  font-size: var(--font-size-md);
-  line-height: var(--line-height-base);
-  color: var(--color-neutral-100);
-  letter-spacing: var(--leading);
+  font-size: 14px;
+  font-family: "Lexend Deca", sans-serif;
+  --paragraph-space: 2rem;
+  --title-space: 1rem;
+  font-weight: 400;
+  color: var(--neutral-100);
 }
 
-h1 {
-  font-size: 64px;
-  line-height: 1.1;
-  font-weight: var(--font-weight-medium);
+.space-text-above,
+p+h1,
+p+h2,
+p+h3,
+p+h4,
+p+h5,
+p+h6,
+h1+h2,
+h2+h3,
+h3+h4,
+h4+h5,
+h5+h6 {
+  margin-top: var(--paragraph-space);
+}
+
+h1+p,
+h2+p,
+h3+p,
+h4+p,
+h5+p,
+h6+p {
+  margin-top: var(--title-space);
+}
+
+p+p {
+  margin-top: var(--title-space);
+}
+
+h1+p,
+h2+p,
+h3+p,
+h4+p,
+h5+p,
+h6+p,
+.space-text-below {
+  margin-bottom: var(--paragraph-space);
+}
+
+p.bold,
+span.bold,
+.body-1.bold,
+.body-2.bold,
+p .bold,
+span .bold,
+.body-1 .bold,
+.body-2 .bold,
+p strong,
+span strong,
+.body-1 strong,
+.body-2 strong,
+p b,
+span b,
+.body-1 b,
+.body-2 b {
+  font-weight: 700;
+}
+
+
+h1,
+.title-1,
+h2,
+.title-2,
+h3,
+.title-3,
+h4,
+.title-4,
+h5,
+.title-5,
+h6,
+.title-6 {
+  font-style: normal;
+  text-transform: none;
+  max-width: 768px;
+}
+
+p,
+.max-w-text {
+  max-width: 768px;
+}
+
+
+h1,
+.title-1 {
+  font-size: 38px;
+  line-height: 40px;
+  font-weight: 400;
+  letter-spacing: -0.018em;
+}
+
+h2,
+.title-2 {
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 400;
+  letter-spacing: -0.012em;
+}
+
+h3,
+.title-3 {
+  font-size: 28px;
+  line-height: 40px;
+  font-weight: 400;
+  letter-spacing: -0.008em;
+}
+
+h4,
+.title-4 {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 400;
+  letter-spacing: -0.004em;
+}
+
+h5,
+.title-5 {
+  font-size: 22px;
+  line-height: 32px;
+  font-weight: 400;
+  letter-spacing: -0.001em;
+}
+
+h6,
+.title-6 {
+  font-size: 18px;
+  line-height: 32px;
+  font-weight: 400;
 }

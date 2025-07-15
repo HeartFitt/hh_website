@@ -29,7 +29,6 @@
 .btn-lg {
     /* border-radius: 0.5rem; */
     font-size: 1rem;
-    letter-spacing: 98%;
     padding: 0.875rem 1.125rem;
 }
        
@@ -44,10 +43,10 @@
 }
 
 .btn-secondary {
-    background: var(--color-neutral-700, #F5F5F5);
+    background: var(--color-neutral-700);
     color: var(--color-neutral-100);
 
     &:hover {
-        background-color: var(--color-neutral-400, #E0E0E0);
+        background-color: var(--color-neutral-800);
     }
 }

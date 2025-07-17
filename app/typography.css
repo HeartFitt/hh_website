@@ -92,8 +92,8 @@ p,
 
 h1,
 .title-1 {
-  font-size: 38px;
-  line-height: 40px;
+  font-size: 64px;
+  line-height: 105%;
   font-weight: 400;
   letter-spacing: -0.018em;
 }

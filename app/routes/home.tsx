@@ -1,5 +1,6 @@
 import type { Route } from "./+types/home";
 import { Welcome } from "../pages/welcome";
+import NavBar from "~/components/NavBar";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -11,13 +12,15 @@ export function meta({}: Route.MetaArgs) {
 export default function Home() {
   return (
     <>
-    <div className="flex max-w-4xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
-      <div className="flex-1">
-        {/* Navigation */}
-        <Welcome />
-        {/* Footer */}
+      <NavBar />
+      <div className="flex flex-col max-w-4xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+        {/* Main Content */}
+        <div className="flex-1">
+          {/* Navigation */}
+          <Welcome />
+          {/* Footer */}
+        </div>
       </div>
-    </div>
     </>
   )
 }

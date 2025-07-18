@@ -12,7 +12,7 @@ interface ProductCardProps {
 const ProductCard = ({ title, actionButton, icon: Icon, iconColor = "var(--neutral-400)", children }: ProductCardProps) => {
 
     return (
-        <div className="bg-neutral-800 p-4 rounded-lg flex flex-col w-full gap-4 justify-between h-[500px] max-w-[500px] max-h-[400px]">
+        <div className="bg-neutral-800 p-4 rounded-lg flex flex-col flex-wrap w-full gap-4 justify-between">
             <div className="flex flex-col gap-2">
                 <div>
                     {Icon && <Icon size={32} color={iconColor} weight="bold" />}
@@ -20,6 +20,7 @@ const ProductCard = ({ title, actionButton, icon: Icon, iconColor = "var(--neutr
                 </div>
                 {children}
             </div>
+            <br className="mt-8" />
             {actionButton}
         </div>
     );

@@ -1,6 +1,7 @@
 import type { Route } from "./+types/home";
-import { Welcome } from "../pages/welcome";
+import { Hero } from "../sections/Hero";
 import NavBar from "~/components/NavBar";
+import Effect from "~/sections/Effect";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -13,11 +14,13 @@ export default function Home() {
   return (
     <>
       <NavBar />
-      <div className="flex flex-col max-w-4xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+      
+      <div className="flex flex-col max-w-[200rem] mx-auto">
         {/* Main Content */}
-        <div className="flex-1">
+        <div className="flex-1 flex flex-col gap-10">
           {/* Navigation */}
-          <Welcome />
+          <Hero />
+          <Effect />
           {/* Footer */}
         </div>
       </div>

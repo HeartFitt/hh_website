@@ -38,15 +38,18 @@ const cardContent: ProductCardContent[] = [
     }
 ]
 
-export function Welcome() {
+export function Hero() {
   return (
-    <main className="flex items-center justify-center pt-16 pb-4">
+    <main className="flex items-center justify-center">
       {/* Hero */}
       <section>
+        {/* Gradient */}
+        <img src="./hh_gradient.png" alt="background gradient" className="absolute z-[-1] blur-[125px] left-[50%] translate-x-[-50%] translate-y-[-50%] top-[50%]" />
+        {/* <img src="./hh_bike.png" alt="background gradient" className="absolute z-[-2] left-[50%] translate-x-[-50%] bottom-0 w-[100vw] max-w-[1200px]" style={{boxShadow: "25 25 50px 50px var(--neutral-900) inset"}} /> */}
         {/* Wrapper */}
-        <div className='flex flex-col items-center gap-[8rem]'>
+        <div className='flex flex-col items-center gap-[6rem]'>
           {/* Title */}
-          <div className="w-full align-center text-center">
+          <div className="w-full align-center text-center pt-16">
             <h1 className='title-1'>
               Gamified,
               <br />
@@ -55,7 +58,7 @@ export function Welcome() {
             </h1>
           </div>
           {/* Cards */}
-          <div className='flex gap-4'>
+          <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
             {cardContent.map((card, index) => (
               <ProductCard
                 key={index}

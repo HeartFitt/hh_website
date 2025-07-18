@@ -92,7 +92,7 @@ p,
 
 h1,
 .title-1 {
-  font-size: 64px;
+  font-size: 82px;
   line-height: 105%;
   font-weight: 400;
   letter-spacing: -0.018em;
@@ -100,7 +100,7 @@ h1,
 
 h2,
 .title-2 {
-  font-size: 32px;
+  font-size: 48px;
   line-height: 40px;
   font-weight: 400;
   letter-spacing: -0.012em;
@@ -108,7 +108,7 @@ h2,
 
 h3,
 .title-3 {
-  font-size: 28px;
+  font-size: 34px;
   line-height: 40px;
   font-weight: 400;
   letter-spacing: -0.008em;

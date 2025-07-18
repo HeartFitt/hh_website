@@ -51,3 +51,20 @@
         opacity: 0.9;
     }
 }
+
+.btn-tertiary {
+    color: var(--neutral-neutral-300, #E0E0E0);
+    font-family: "Lexend Deca";
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.64px;
+    text-decoration-line: underline;
+    text-decoration-style: dotted;
+    text-decoration-skip-ink: auto;
+    text-decoration-color: var(--neutral-neutral-600, #757575);
+    text-decoration-thickness: 6.5%; /* 1.04px */
+    text-underline-offset: 20.5%; /* 3.28px */
+    text-underline-position: from-font;
+}

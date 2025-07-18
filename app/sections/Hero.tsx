@@ -40,7 +40,7 @@ const cardContent: ProductCardContent[] = [
 
 export function Hero() {
   return (
-    <main className="flex items-center justify-center">
+    <main className="flex items-center justify-center pt-16">
       {/* Hero */}
       <section>
         {/* Gradient */}

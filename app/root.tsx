@@ -9,6 +9,7 @@ import {
 
 import "./app.css";
 import type { Route } from "./+types/root";
+import NavBar from "./components/NavBar";
 //fallback for squircle-js 
 
 export const links: Route.LinksFunction = () => [
@@ -34,9 +35,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
-        <ScrollRestoration />
-        <Scripts />
+        <div className="flex flex-col max-w-[200rem] mx-auto">
+          <NavBar />
+          {children}
+          <ScrollRestoration />
+          <Scripts />
+        </div>
       </body>
     </html>
   );

@@ -26,7 +26,7 @@ const Snack: React.FC<snackProps> = ({
             })} p-5 rounded-lg`}>
                 {React.cloneElement(icon, {size: 32, weight: 'bold' })}
             </div>
-            <h5>{children}</h5>
+            <span className="text-[18px] sm:text-[24px] leading-tight">{children}</span>
         </div>
     );
 };

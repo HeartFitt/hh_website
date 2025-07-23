@@ -10,6 +10,7 @@ import {
 import "./app.css";
 import type { Route } from "./+types/root";
 import NavBar from "./components/NavBar";
+import Footer from "./components/Footer";
 //fallback for squircle-js 
 
 export const links: Route.LinksFunction = () => [
@@ -42,6 +43,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <Scripts />
         </div>
       </body>
+      <Footer />
     </html>
   );
 }

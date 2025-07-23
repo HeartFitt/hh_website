@@ -13,9 +13,9 @@ const snacks: { icon: ReactElement<Icon>; description: string }[] = [
 const HubBenefits: React.FC = () => {
     return (
         <section>
-           <div className='flex flex-col justify-center items-center gap-8'>
+           <div className='flex flex-col justify-center items-center gap-8 my-16'>
             {/* Snacks and Desc */}
-            <div className='text-center'>
+            <div className='text-center gap-2'>
                 <h2>Hub Benefits</h2>
                 <h6 className='text-neutral-500'>Harness the revenue and popularity opportunities
  through HeartHero Hub Locations.</h6>

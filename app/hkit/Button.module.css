@@ -6,6 +6,10 @@
     border-radius: 0.5rem;
 }
 
+.btn:disabled {
+    opacity: 25%;
+}
+
 /* Container and Treatment */
 .btnContainer {
     display: flex;

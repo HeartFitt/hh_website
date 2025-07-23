@@ -4,6 +4,8 @@ import React from "react";
 import Button from "~/hkit/Button";
 import VideoPlayer from "~/components/VideoPlayer";
 import HubBenefits from "~/sections/HubBenefits";
+import DecisionToInstall from "~/sections/DecisionToInstall";
+import ContactForm from "~/sections/BusinessForm";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -15,22 +17,25 @@ export function meta({}: Route.MetaArgs) {
 export default function Business() {
     return (
         <>
-            <div className="pt-32 px-4">
+            <div className="flex flex-col pt-32 px-4 gap-10">
                 {/* Back Button and Title */}
-                <div className="flex flex-col">
+                <div className="flex flex-col gap-4">
                     <div>
                         <Button icon={<ArrowLeftIcon size={24} weight="bold"/>} variant="icon" />   
                     </div>
                     <br/>
-                    <h2>Business</h2>
-                    <p className="px-1 text-neutral-400">Drive patron engagement and excitement by becoming a <span className="text-neutral-200">HeartHero Hub.</span></p>
+                    <h1>Business</h1>
+                    <h6 className="px-1 text-neutral-400">Drive patron engagement and excitement by becoming a <span className="text-neutral-200">HeartHero Hub.</span></h6>
+                <VideoPlayer></VideoPlayer>
                 </div>
                 {/* Video */}
                 {/* Placeholder */}
-                <div className="max-w-[50rem]">
-                    <VideoPlayer></VideoPlayer>
-                </div>
                 <HubBenefits></HubBenefits>
+                <DecisionToInstall/>
+                <div className="">
+                    <ContactForm />
+                </div>
+                <br className="py-[20rem]"></br>
             </div>
         </>
     )

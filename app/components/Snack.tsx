@@ -14,7 +14,7 @@ const Snack: React.FC<snackProps> = ({
     children,
 }: snackProps) => {
     return (
-        <div className='flex flex-row items-center gap-4 bg-neutral-800 border rounded-xl p-2 pr-4 border-neutral-700'>
+        <div className='flex flex-row items-center gap-4 bg-neutral-800 border rounded-xl p-1 pr-4 border-neutral-700'>
             <div className={`${clsx({ 
                 'bg-neutral-700':color === 'default',
                 'bg-green-500':color === 'green',

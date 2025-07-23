@@ -32,7 +32,7 @@ export default function Business() {
                 {/* Placeholder */}
                 <HubBenefits></HubBenefits>
                 <DecisionToInstall/>
-                <div className="">
+                <div>
                     <ContactForm />
                 </div>
                 <br className="py-[20rem]"></br>

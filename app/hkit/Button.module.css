@@ -53,7 +53,7 @@
 }
 
 .btn-tertiary {
-    color: var(--neutral-neutral-300, #E0E0E0);
+    color: var(--neutral-300, #E0E0E0);
     font-family: "Lexend Deca";
     font-size: 16px;
     font-style: normal;
@@ -67,4 +67,15 @@
     text-decoration-thickness: 6.5%; /* 1.04px */
     text-underline-offset: 20.5%; /* 3.28px */
     text-underline-position: from-font;
+}
+
+.btn-icon {
+    background-color: var(--neutral-700);
+    padding: .50rem;
+    border-radius: 100%;
+
+    &:hover {
+        /* background-color: var(--color-neutral-600); */
+        opacity: 0.9;
+    }
 }

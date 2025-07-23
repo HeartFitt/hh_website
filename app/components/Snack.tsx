@@ -10,23 +10,23 @@ type snackProps = {
 
 const Snack: React.FC<snackProps> = ({ 
     icon = <SmileyIcon />,
-    color = 'var(--neutral-700)',
+    color = 'default',
     children,
 }: snackProps) => {
     return (
         <div className='flex flex-row items-center gap-4 bg-neutral-800 border rounded-xl p-2 pr-4 border-neutral-700'>
             <div className={`${clsx({ 
-                color,
+                'bg-neutral-700':color === 'default',
                 'bg-green-500':color === 'green',
                 'bg-blue-500':color === 'blue',
                 'bg-red-500':color === 'red',
                 'bg-yellow-500':color === 'yellow',
                 'bg-orange-500':color === 'orange',
                 // other
-            })} p-5 rounded-lg`}>
-                {React.cloneElement(icon, {size: 32, weight: 'bold' })}
+            })} p-4 rounded-lg`}>
+                {React.cloneElement(icon, {size: 24, weight: 'bold' })}
             </div>
-            <span className="text-[18px] sm:text-[24px] leading-tight">{children}</span>
+            <span className="text-[16px] sm:text-[20px] leading-tight">{children}</span>
         </div>
     );
 };

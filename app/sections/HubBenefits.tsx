@@ -1,21 +1,28 @@
 import React, { type ReactElement} from 'react';
-import { UsersFourIcon, type Icon } from '@phosphor-icons/react';
+import { MoneyWavyIcon, SignatureIcon, ThumbsUpIcon, TrendUpIcon, UsersFourIcon, UserSoundIcon, type Icon } from '@phosphor-icons/react';
 import Snack from '~/components/Snack';
 
 const snacks: { icon: ReactElement<Icon>; description: string }[] = [
-    { icon: <UsersFourIcon />, description: 'This is a description for Snack 1' },
-    { icon: <UsersFourIcon />, description: 'This is a description for Snack 2' },
-    { icon: <UsersFourIcon />, description: 'This is a description for Snack 3' },
+    { icon: <MoneyWavyIcon />, description: 'Passive Revenue' },
+    { icon: <TrendUpIcon />, description: 'Athletic Hot-spot' },
+    { icon: <ThumbsUpIcon />, description: 'Member Engagement' },
+    { icon: <SignatureIcon />, description: 'Drive New Memberships' },
+    { icon: <UserSoundIcon />, description: 'Word of Mouth Growth' },
 ]
 
 const HubBenefits: React.FC = () => {
     return (
         <section>
-           <div>
+           <div className='flex flex-col justify-center items-center gap-8'>
             {/* Snacks and Desc */}
-            <div className='flex flex-wrap gap-8 '>
+            <div className='text-center'>
+                <h2>Hub Benefits</h2>
+                <h6 className='text-neutral-500'>Harness the revenue and popularity opportunities
+ through HeartHero Hub Locations.</h6>
+            </div>
+            <div className='flex flex-wrap justify-center gap-4 items-center '>
                 {snacks.map((snack, index) => (
-                    <Snack key={index} icon={snack.icon} color='green'>
+                    <Snack key={index} icon={snack.icon}>
                         {snack.description}
                     </Snack>
                 ))}

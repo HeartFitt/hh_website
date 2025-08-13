@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Button from '~/hkit/Button';
 import { CheckIcon } from '@phosphor-icons/react';
+import { createLead, type LeadCreate } from "~/utils/api";
 
 const TextInput = ({ label, name, value, onChange }: any) => (
   <div className="mb-4">
@@ -69,6 +70,7 @@ const ContactForm = () => {
     memberCount: '0 - 50',
     offersCycling: '',
   });
+  const [submitting, setSubmitting] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -76,26 +78,46 @@ const ContactForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const response = await fetch('/api/submit-form', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
 
-      if (!response.ok) throw new Error('Network response was not ok');
-      alert('Form submitted successfully!');
-    } catch (error) {
-      console.error(error);
-      alert('There was an error submitting the form.');
+    const [first, ...rest] = formData.contactName.trim().split(' ').filter(Boolean);
+    const First_Name = first || undefined;
+    const Last_Name = rest.length ? rest.join(' ') : first || 'Unknown';
+
+    const payload: LeadCreate = {
+      First_Name,
+      Last_Name,
+      Company: formData.clubName || undefined,
+      Street: formData.clubAddress || undefined,
+      Lead_Source: 'Website',
+      Lead_Type: 'Business',
+      Description: `Member count: ${formData.memberCount}\nOffers cycling: ${formData.offersCycling}`,
+    };
+
+    setSubmitting(true);
+    try {
+      await createLead(payload);
+      alert('Thanks! Your information was submitted.');
+      setFormData({ contactName: '', clubName: '', clubAddress: '', memberCount: '0 - 50', offersCycling: '' });
+    } catch (err: any) {
+      const status = err?.status as number | undefined;
+      if (status === 400) {
+        alert(`Please check your info: ${err.message || 'Validation failed.'}`);
+      } else if (status === 502) {
+        alert('Sorry, our CRM is unavailable right now. Please try again later.');
+      } else {
+        alert('Unexpected error. Please try again.');
+      }
+      console.error(err);
+    } finally {
+      setSubmitting(false);
     }
   };
 
   const isFormValid =
-  formData.contactName.trim() !== '' &&
-  formData.clubName.trim() !== '' &&
-  formData.clubAddress.trim() !== '' &&
-  formData.offersCycling !== '';
+    formData.contactName.trim() !== '' &&
+    formData.clubName.trim() !== '' &&
+    formData.clubAddress.trim() !== '' &&
+    formData.offersCycling !== '';
 
   return (
     <form onSubmit={handleSubmit} className="max-w-[50rem] mx-auto lg:p-6 p-2 text-neutral-100">
@@ -140,12 +162,11 @@ const ContactForm = () => {
         onChange={handleChange}
       />
 
-      {/* 🔁 Use your Button component here */}
       <Button
-        label="Submit"
+        label={submitting ? 'Submitting…' : 'Submit'}
         onClick={handleSubmit}
         icon={<CheckIcon />}
-        disabled={!isFormValid}
+        disabled={!isFormValid || submitting}
         fillWidth
         />
     </form>

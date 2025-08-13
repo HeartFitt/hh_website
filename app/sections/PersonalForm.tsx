@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Button from '~/hkit/Button';
 import { CheckIcon } from '@phosphor-icons/react';
+import { createLead, type LeadCreate } from "~/utils/api";
 
 const TextAreaField = ({ label, name, value, onChange, rows = 4 }: any) => (
   <div className="mb-4">
@@ -83,36 +84,59 @@ const ContactForm = () => {
     docApproved: '',
     ownsStrap: '',
   });
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const target = e.target as HTMLInputElement | HTMLSelectElement;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+    const target = e.target as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
     setFormData({ ...formData, [target.name]: target.value });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const response = await fetch('/api/submit-form', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
 
-      if (!response.ok) throw new Error('Network response was not ok');
-      alert('Form submitted successfully!');
-    } catch (error) {
-      console.error(error);
-      alert('There was an error submitting the form.');
+    // Map UI fields to API model
+    const [first, ...rest] = formData.name.trim().split(' ').filter(Boolean);
+    const First_Name = first || undefined;
+    const Last_Name = rest.length ? rest.join(' ') : first || 'Unknown'; // Zoho requires Last_Name
+
+    const payload: LeadCreate = {
+      First_Name,
+      Last_Name,
+      Email: formData.email || undefined,
+      Phone: formData.phone || undefined,
+      Lead_Source: 'Website',
+      Lead_Type: 'Personal',
+      Description: `Goals: ${formData.goals}\nDoctor approved: ${formData.docApproved}\nOwns HR strap: ${formData.ownsStrap}`,
+    };
+
+    setSubmitting(true);
+    try {
+      const res = await createLead(payload);
+      alert('Thanks! Your information was submitted.');
+      // Optional: reset form
+      setFormData({ name: '', email: '', phone: '', goals: '', docApproved: '', ownsStrap: '' });
+    } catch (err: any) {
+      const status = err?.status as number | undefined;
+      if (status === 400) {
+        alert(`Please check your info: ${err.message || 'Validation failed.'}`);
+      } else if (status === 502) {
+        alert('Sorry, our CRM is unavailable right now. Please try again later.');
+      } else {
+        alert('Unexpected error. Please try again.');
+      }
+      console.error(err);
+    } finally {
+      setSubmitting(false);
     }
   };
 
   const isFormValid =
-  formData.name.trim() !== '' &&
-  formData.email.trim() !== '' &&
-  formData.phone.trim() !== '' &&
-  formData.goals.trim() !== '' &&
-  formData.docApproved !== '';
-  formData.ownsStrap !== '';
+    formData.name.trim() !== '' &&
+    formData.email.trim() !== '' &&
+    formData.phone.trim() !== '' &&
+    formData.goals.trim() !== '' &&
+    formData.docApproved !== '' &&
+    formData.ownsStrap !== '';
 
   return (
     <form onSubmit={handleSubmit} className="max-w-[50rem] mx-auto lg:p-6 p-2 text-neutral-100">
@@ -156,12 +180,11 @@ const ContactForm = () => {
         onChange={handleChange}
       />
 
-      {/* 🔁 Use your Button component here */}
       <Button
-        label="Submit"
+        label={submitting ? 'Submitting…' : 'Submit'}
         onClick={handleSubmit}
         icon={<CheckIcon />}
-        disabled={!isFormValid}
+        disabled={!isFormValid || submitting}
         fillWidth
         />
     </form>

@@ -1,5 +1,6 @@
 {
   "name": "hh_website",
+  "homepage": "https://heartfitt.github.io/hh_website",
   "private": true,
   "type": "module",
   "scripts": {

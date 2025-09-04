@@ -4,9 +4,9 @@ import { PlayIcon } from "@phosphor-icons/react";
 
 const VideoPlayer = () => {
   return (
-    <video className="h-full w-full rounded-lg" controls>
+    <video className="h-full w-full rounded-lg" poster="/poster.png" controls>
       <source
-        src="https://docs.material-tailwind.com/demo.mp4"
+        src="/hh_placeholder.mp4"
         type="video/mp4"
       />
       Your browser does not support the video tag.

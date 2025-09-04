@@ -8,7 +8,7 @@ const TextInput = ({ label, name, value, onChange }: any) => (
     <label className="block mb-1 text-sm font-medium">{label}</label>
     <input
       type="text"
-      name={name}
+      name={name}  
       value={value}
       onChange={onChange}
       className="w-full rounded-md bg-neutral-800 text-neutral-100 p-2 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-100"

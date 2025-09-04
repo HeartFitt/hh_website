@@ -3,6 +3,7 @@ import { Hero } from "../sections/Hero";
 import NavBar from "~/components/NavBar";
 import Effect from "~/sections/Effect";
 import { createPortal } from "react-dom";
+import ScrollFadeIn from "~/components/ScrollFadeIn";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -18,8 +19,12 @@ export default function Home() {
       <div className="flex-1 flex flex-col gap-10 items-center">
         {/* Navigation */}
         <Hero />
-        <img src="./hh_iphone.png" className="max-w-[20rem]" alt="iphone" />
-        <Effect />
+        <ScrollFadeIn direction="up" delay={0.2}>
+          <img src="./hh_iphone.png" className="max-w-[20rem]" alt="iphone" />
+        </ScrollFadeIn>
+        <ScrollFadeIn direction="up" delay={0.4}>
+          <Effect />
+        </ScrollFadeIn>
         {/* Footer */}
       </div>
     </>

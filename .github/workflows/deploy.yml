@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - main   # or master if that's your default branch
+      - main   # or your default branch
 
 permissions:
   contents: read
@@ -27,12 +27,12 @@ jobs:
         run: npm ci
 
       - name: Build site
-        run: npm run build
+        run: npm run build   # now produces build/client/index.html
 
       - name: Upload build output
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./build/client   # React Router puts client files here
+          path: ./build/client   # contains index.html
 
   deploy:
     environment:

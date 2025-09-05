@@ -1,6 +1,5 @@
 {
   "name": "hh_website",
-  "homepage": "https://heartfitt.github.io/hh_website",
   "private": true,
   "type": "module",
   "scripts": {
@@ -12,15 +11,16 @@
   "dependencies": {
     "@emotion/css": "^11.13.5",
     "@emotion/react": "^11.14.0",
-    "@phosphor-icons/react": "^2.1.10",
     "@react-router/node": "^7.5.3",
     "@react-router/serve": "^7.5.3",
     "clsx": "^2.1.1",
     "emotion": "^11.0.0",
     "framer-motion": "^12.23.12",
     "isbot": "^5.1.27",
-    "react": "^19.1.0",
-    "react-dom": "^19.1.0",
+    "lucide-react": "^0.542.0",
+    "netlify": "^23.5.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-mobile-app-button": "^1.2.19",
     "react-router": "^7.5.3"
   },

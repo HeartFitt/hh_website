@@ -4,5 +4,5 @@ export default {
   // Config options...
   // Server-side render by default, to enable SPA mode set this to `false`
   ssr: true,
-  basename: "/hh_website",
+  basename: process.env.NODE_ENV === "production" ? "/hh_website" : "/"
 } satisfies Config;

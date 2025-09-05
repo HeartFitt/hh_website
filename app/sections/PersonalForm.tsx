@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Button from '~/hkit/Button';
-import { CheckIcon } from '@phosphor-icons/react';
+import { Check } from 'lucide-react';
 import { createLead, type LeadCreate } from "~/utils/api";
 
 const TextAreaField = ({ label, name, value, onChange, rows = 4 }: any) => (
@@ -184,7 +184,7 @@ const ContactForm = () => {
       <Button
         label={submitting ? 'Submitting…' : 'Submit'}
         onClick={handleSubmit}
-        icon={<CheckIcon />}
+        icon={<Check />}
         disabled={!isFormValid || submitting}
         fillWidth
         />

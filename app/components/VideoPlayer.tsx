@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "~/hkit/Button";
-import { PlayIcon } from "@phosphor-icons/react";
+import { Play } from "lucide-react";
 
 const VideoPlayer = () => {
   return (

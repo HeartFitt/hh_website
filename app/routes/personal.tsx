@@ -4,7 +4,7 @@ import VideoPlayer from "~/components/VideoPlayer";
 import HubBenefits from "~/sections/HubBenefits";
 import DecisionToInstall from "~/sections/DecisionToInstall";
 import ContactForm from "~/sections/PersonalForm";
-import { ArrowLeftIcon } from "@phosphor-icons/react";
+import { ArrowLeft } from "lucide-react";
 import AppStoreAnnouncement from "~/sections/AppStoreAnnouncement";
 import ScrollFadeIn from "~/components/ScrollFadeIn";
 
@@ -16,7 +16,7 @@ export default function Personal() {
                 <ScrollFadeIn direction="up">
                   <div className="flex flex-col gap-4">
                       <div>
-                         <Button onClick={() => window.history.back()} icon={<ArrowLeftIcon size={24} weight="bold"/>} variant="icon" />   
+                         <Button onClick={() => window.history.back()} icon={<ArrowLeft size={24} strokeWidth={3}/>} variant="icon" />   
                       </div>
                       <br/>
                       <h1>Personal</h1>

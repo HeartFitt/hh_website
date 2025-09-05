@@ -1,4 +1,4 @@
-import { ListIcon, XIcon } from '@phosphor-icons/react';
+import { ListIcon, X } from 'lucide-react';
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router';
 import Button from '~/hkit/Button';
@@ -69,7 +69,7 @@ const NavBar: React.FC = () => {
                                     </li>
                                 ))}
                             </ul>
-                            <Button icon={<XIcon />} label='Close' variant="secondary" size="lg" onClick={() => setMenuOpen(false)} fillWidth={false} />
+                            <Button icon={<X />} label='Close' variant="secondary" size="lg" onClick={() => setMenuOpen(false)} fillWidth={false} />
                         </div>
                     )}
                 </div>

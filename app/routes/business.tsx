@@ -1,4 +1,4 @@
-import { ArrowLeftIcon } from "@phosphor-icons/react";
+import { ArrowLeft } from "lucide-react";
 import type { Route } from "./+types/home";
 import React from "react";
 import Button from "~/hkit/Button";
@@ -23,7 +23,7 @@ export default function Business() {
                                 <ScrollFadeIn direction="up">
                                     <div className="flex flex-col gap-4">
                                             <div>
-                                                    <Button onClick={() => window.history.back()} icon={<ArrowLeftIcon size={24} weight="bold"/>} variant="icon" />   
+                                                    <Button onClick={() => window.history.back()} icon={<ArrowLeft size={24} strokeWidth={3}/>} variant="icon" />   
                                             </div>
                                             <br/>
                                             <h1>Business</h1>

@@ -27,7 +27,7 @@ export default function Business() {
                                             </div>
                                             <br/>
                                             <h1>Business</h1>
-                                            <h6 className="px-1 text-neutral-400">Drive patron engagement and excitement by becoming a <span className="text-neutral-200">HeartHero Hub.</span></h6>
+                                            <h6 className="px-1 text-neutral-400">Drive member engagement and passive revenue by becoming the Local HeartHero Hub in your area.</h6>
                                             <VideoPlayer />
                                     </div>
                                 </ScrollFadeIn>

@@ -16,7 +16,7 @@ type ProductCardContent = {
 const cardContent: ProductCardContent[] = [
     {
         title: "Personal",
-        actionButton: <Button onClick={() => window.location.href = "/personal"} label="Get Started" size="lg" variant="primary" fillWidth={true} />,
+        actionButton: <Button onClick={() => window.location.href = "/personal"} label="Join the Waitlist" size="lg" variant="primary" fillWidth={true} />,
   icon: PersonStanding,
         iconColor: "var(--orange-500)",
         desc: "Make exercise fun & rise on the leaderboard.",

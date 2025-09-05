@@ -20,7 +20,7 @@ export default function Personal() {
                       </div>
                       <br/>
                       <h1>Personal</h1>
-                      <h6 className="px-1 text-neutral-400">Train your body to burn fat as fuel. Take part in hearth-healthy exercise that is optimized for fat burn, instead of unhelpful intensity.</h6>
+                      <h6 className="px-1 text-neutral-400">Fat burn starts in Blue Recovery, builds with Green Endurance, and ignites in Orange & Red Power. Cardio becomes a game worth playing.</h6>
                       <VideoPlayer />
                   </div>
                 </ScrollFadeIn>

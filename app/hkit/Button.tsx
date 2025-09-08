@@ -1,9 +1,6 @@
-import React, {
-  type ReactElement,
-  type ComponentPropsWithoutRef,
-} from "react";
+import React, { type ReactElement, type ComponentPropsWithoutRef } from "react";
 import styles from "./Button.module.css";
-import { CheckIcon, type Icon } from "@phosphor-icons/react";
+import { Check } from "lucide-react";
 import { useNavigate, type To } from "react-router";
 
 export type ButtonProps = {
@@ -12,9 +9,9 @@ export type ButtonProps = {
   size?: "sm" | "md" | "lg" | "rounded";
   variant?: "primary" | "secondary" | "tertiary" | "icon";
   fillWidth?: boolean;
-  appendBefore?: ReactElement<Icon>;
-  appendAfter?: ReactElement<Icon>;
-  icon?: ReactElement<Icon>; // Only for icon variant
+  appendBefore?: ReactElement<any>;
+  appendAfter?: ReactElement<any>;
+  icon?: ReactElement<any>; // Only for icon variant
   link?: To;
 } & ComponentPropsWithoutRef<"button">;
 
@@ -54,17 +51,17 @@ const Button: React.FC<ButtonProps> = ({
       aria-label={label}
     >
       {variant === "icon" ? (
-        icon ?? <CheckIcon />
+        icon ?? <Check size={20} />
       ) : (
         <div className="flex justify-center gap-1">
-          {appendBefore && appendBefore}
+          {appendBefore}
           {children && (
             <span className={`px-1 btn-${variant === "tertiary" ? "tertiary" : ""}`}>
               {children}
             </span>
           )}
           {label}
-          {appendAfter && appendAfter}
+          {appendAfter}
         </div>
       )}
     </button>

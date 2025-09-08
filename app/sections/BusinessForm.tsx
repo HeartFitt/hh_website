@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Button from '~/hkit/Button';
-import { CheckIcon } from '@phosphor-icons/react';
+import { Check } from 'lucide-react';
 import { createLead, type LeadCreate } from "~/utils/api";
 
 const TextInput = ({ label, name, value, onChange }: any) => (
@@ -8,7 +8,7 @@ const TextInput = ({ label, name, value, onChange }: any) => (
     <label className="block mb-1 text-sm font-medium">{label}</label>
     <input
       type="text"
-      name={name}
+      name={name}  
       value={value}
       onChange={onChange}
       className="w-full rounded-md bg-neutral-800 text-neutral-100 p-2 border border-neutral-700 focus:outline-none focus:ring-2 focus:ring-neutral-100"
@@ -165,7 +165,7 @@ const ContactForm = () => {
       <Button
         label={submitting ? 'Submitting…' : 'Submit'}
         onClick={handleSubmit}
-        icon={<CheckIcon />}
+        icon={<Check />}
         disabled={!isFormValid || submitting}
         fillWidth
         />

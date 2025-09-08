@@ -1,15 +1,15 @@
 import React, { type ReactElement} from 'react';
-import { type Icon, SmileyIcon } from '@phosphor-icons/react';
+import { Smile, type LucideIcon } from 'lucide-react';
 import clsx from 'clsx';
 
 type snackProps = {
-    icon: React.ReactElement<Icon>,
+    icon: React.ElementType,
     color?: string | 'green' | 'blue' | 'red' | 'yellow' | 'orange';
     children?: React.ReactNode;
 }
 
 const Snack: React.FC<snackProps> = ({ 
-    icon = <SmileyIcon />,
+    icon = Smile,
     color = 'default',
     children,
 }: snackProps) => {
@@ -24,7 +24,7 @@ const Snack: React.FC<snackProps> = ({
                 'bg-orange-500':color === 'orange',
                 // other
             })} p-4 rounded-lg`}>
-                {React.cloneElement(icon, {size: 24, weight: 'bold' })}
+                {React.createElement(icon, { size: 24, strokeWidth: 2 })}
             </div>
             <span className="text-[16px] sm:text-[20px] leading-tight">{children}</span>
         </div>

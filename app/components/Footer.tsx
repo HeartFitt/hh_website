@@ -1,4 +1,4 @@
-import { ArrowUpIcon } from '@phosphor-icons/react';
+import { ArrowUp } from 'lucide-react';
 import React from 'react';
 import Button from '~/hkit/Button';
 
@@ -15,7 +15,7 @@ const Footer: React.FC = () => {
       <Button
         onClick={scrollToTop}
         variant='icon'
-        icon={<ArrowUpIcon/>}
+  icon={<ArrowUp/>}
       >
         ↑ Return to Top
       </Button>

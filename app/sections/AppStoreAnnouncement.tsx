@@ -9,7 +9,7 @@ export default function AppStoreAnnouncement() {
         
         {/* Main heading */}
         <h2 className="text-5xl md:text-6xl font-bold text-white tracking-tight">
-          Coming Fall 2025
+          Coming Winter 2025
         </h2>
         
         {/* Subtitle */}

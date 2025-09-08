@@ -1,22 +1,23 @@
 import React from "react";
-import { SneakerMoveIcon, CheckIcon, BuildingsIcon, type IconProps } from "@phosphor-icons/react";
+import { PersonStanding, Check, Building } from "lucide-react";
 import ProductCard from "~/components/ProductCard";
 import Button from "~/hkit/Button";
+import type { LucideIcon } from "lucide-react";
 
 type ProductCardContent = {
-    title: string;
-    actionButton: React.ReactNode;
-    icon?: React.ElementType<IconProps>;
-    iconColor?: string;
-    desc?: string;
-    features?: string[];
+  title: string;
+  actionButton: React.ReactNode;
+  icon?: React.ElementType;
+  iconColor?: string;
+  desc?: string;
+  features?: string[];
 }
 
 const cardContent: ProductCardContent[] = [
     {
         title: "Personal",
-        actionButton: <Button label="Get Started" size="lg" variant="primary" fillWidth={true} />,
-        icon: SneakerMoveIcon,
+        actionButton: <Button onClick={() => window.location.href = "/personal"} label="Join the Waitlist" size="lg" variant="primary" fillWidth={true} />,
+  icon: PersonStanding,
         iconColor: "var(--orange-500)",
         desc: "Make exercise fun & rise on the leaderboard.",
         features: [
@@ -26,8 +27,8 @@ const cardContent: ProductCardContent[] = [
     },
     {
         title: "Business",
-        actionButton: <Button label="Join Now" size="lg" variant="secondary" fillWidth={true} />,
-        icon: BuildingsIcon,
+        actionButton: <Button onClick={() => window.location.href = "/business"} label="Join Now" size="lg" variant="secondary" fillWidth={true} />,
+  icon: Building,
         iconColor: "var(--green-500)",
         desc: "Turn cardio into income.",
         features: [
@@ -72,7 +73,7 @@ export function Hero() {
                 <ol >
                   {card.features?.map((feature, index) => (
                     <li className="flex flex-row gap-2 items-center" key={index}>
-                      <CheckIcon size={16} weight="bold" color="var(--neutral-500)" />
+                      <Check size={16} strokeWidth={3} color="var(--neutral-500)" />
                       <span className="font-normal text-md text-neutral-200">{feature}</span>
                     </li>
                   ))}

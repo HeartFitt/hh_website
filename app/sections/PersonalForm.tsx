@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Button from '~/hkit/Button';
-import { CheckIcon } from '@phosphor-icons/react';
+import { Check } from 'lucide-react';
 import { createLead, type LeadCreate } from "~/utils/api";
 
 const TextAreaField = ({ label, name, value, onChange, rows = 4 }: any) => (
@@ -16,11 +16,11 @@ const TextAreaField = ({ label, name, value, onChange, rows = 4 }: any) => (
   </div>
 );
 
-const TextInput = ({ label, name, value, onChange }: any) => (
+const TextInput = ({ label, name, type = 'text', value, onChange }: any) => (
   <div className="mb-4">
     <label className="block mb-1 text-sm font-medium">{label}</label>
     <input
-      type="text"
+      type={type}
       name={name}
       value={value}
       onChange={onChange}
@@ -156,6 +156,7 @@ const ContactForm = () => {
         onChange={handleChange}
       />
       <TextInput
+        type="phone"
         label="phone"
         name="phone"
         value={formData.phone}
@@ -183,7 +184,7 @@ const ContactForm = () => {
       <Button
         label={submitting ? 'Submitting…' : 'Submit'}
         onClick={handleSubmit}
-        icon={<CheckIcon />}
+        icon={<Check />}
         disabled={!isFormValid || submitting}
         fillWidth
         />

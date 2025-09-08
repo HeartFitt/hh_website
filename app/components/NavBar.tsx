@@ -1,4 +1,4 @@
-import { ListIcon, XIcon } from '@phosphor-icons/react';
+import { ListIcon, X } from 'lucide-react';
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router';
 import Button from '~/hkit/Button';
@@ -40,18 +40,20 @@ const NavBar: React.FC = () => {
             prevScrollY.current = currentScrollY;
         };
 
+        if (menuOpen) {setMenuOpen(false)};
+
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
     return (
         <nav
-            className={`fixed z-[999] bg-neutral-800 right-0 left-0 py-2 px-2 m-2 rounded-lg items-center gap-10 justify-between transition-transform duration-300 ${
+            className={`fixed z-[999] bg-neutral-800 right-0 left-0 py-2 px-2 m-2 rounded-lg items-center gap-10 justify-between transition duration-300 ${
                 hidden ? '-translate-y-[100px]' : 'translate-y-0'
             }`}
         >
             {isMobile ? (
-                <div className="flex flex-col items-center justify-between w-full relative">
+                <div className="flex flex-col justify-between w-full relative">
                     <div className='flex flex-row justify-between w-full'>
                         <Link to={"/"}>
                             <img src="./hh_logo.svg" className='max-w-[8rem]' alt="" />
@@ -63,11 +65,11 @@ const NavBar: React.FC = () => {
                             <ul style={{ display: 'block', listStyle: 'none', margin: 0, padding: 0 }}>
                                 {navLinks.map(link => (
                                     <li key={link.name}>
-                                        <Button link={link.path} onClick={() => setMenuOpen(false)} label={link.name} variant='tertiary' />
+                                        <Button link={link.path} onClick={() => setMenuOpen(false)} label={link.name} variant='tertiary' size='lg' />
                                     </li>
                                 ))}
                             </ul>
-                            <Button icon={<XIcon />} variant="icon" size="lg" onClick={() => setMenuOpen(false)} fillWidth={true} />
+                            <Button icon={<X />} label='Close' variant="secondary" size="lg" onClick={() => setMenuOpen(false)} fillWidth={false} />
                         </div>
                     )}
                 </div>
@@ -83,9 +85,9 @@ const NavBar: React.FC = () => {
                             ))}
                         </ul>
                     </div>
-                    <div>
+                    {/* <div>
                         <Button label="Sign Up" size="rounded" variant="secondary" fillWidth={false} />
-                    </div>
+                    </div> */}
                 </div>
             )}
         </nav>

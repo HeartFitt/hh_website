@@ -3,7 +3,9 @@
 export type LeadType = 'Personal' | 'Business';
 
 // Base API URL: future-friendly (env override) but hard-coded fallback per request
-const API_BASE = (typeof import.meta !== 'undefined' && (import.meta as any).env?.VITE_API_BASE_URL) || 'http://localhost:8000';
+// const API_BASE = (typeof import.meta !== 'undefined' && (import.meta as any).env?.VITE_API_BASE_URL) || 'http://localhost:8000';
+const API_BASE = (typeof import.meta !== 'undefined' && (import.meta as any).env?.VITE_API_BASE_URL) || 'https://hearthero-api.bluemushroom-e8217cd9.eastus.azurecontainerapps.io';
+
 
 export interface LeadCreate {
   First_Name?: string;
@@ -58,7 +60,7 @@ async function requestJson<TResponse>(path: string, init?: RequestInit): Promise
 
 // Specific API call: Create Lead
 export function createLead(body: LeadCreate) {
-  return requestJson<LeadCreateResponse>('/leads', {
+  return requestJson<LeadCreateResponse>('/leads/', {
     method: 'POST',
     body: JSON.stringify(body),
   });

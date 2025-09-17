@@ -19,10 +19,11 @@ const cardContent: ProductCardContent[] = [
         actionButton: <Button onClick={() => window.location.href = "/personal"} label="Join the Waitlist" size="lg" variant="primary" fillWidth={true} />,
   icon: PersonStanding,
         iconColor: "var(--orange-500)",
-        desc: "Make exercise fun & rise on the leaderboard.",
+        desc: "Make exercise fun & climb the leaderboard",
         features: [
-            "App calibrated to personal hardware",
-            "Let’s you exercise at your pace"
+            "Endurance Game: Optimal fat burn",
+            "Power Game: HIIT intervals for Anti-Aging",
+            "Recovery Game: Track Fitness Progress"
         ]
     },
     {
@@ -30,11 +31,11 @@ const cardContent: ProductCardContent[] = [
         actionButton: <Button onClick={() => window.location.href = "/business"} label="Join Now" size="lg" variant="secondary" fillWidth={true} />,
   icon: Building,
         iconColor: "var(--green-500)",
-        desc: "Turn cardio into income.",
+        desc: "Earn revenue by members that train from home.",
         features: [
-            "Club leaderboards",
-            "Heart rate detection hardware",
-            "Custom theme tailored to your club"
+            "Secure a 5 Mile Exclusive Radius",
+            "Club Challenges Encourage Friendly Competition",
+            "Give Personal Training a Competitive Edge"
         ]
     }
 ]
@@ -54,7 +55,7 @@ export function Hero() {
             <h1 className='title-1'>
               Gamified,
               <br />
-              Heart-healthy <br />
+              Heart-Healthy <br />
               Exercise.
             </h1>
           </div>

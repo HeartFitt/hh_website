@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
       >
         ↑ Return to Top
       </Button>
-      <p className="mt-2 text-xs text-neutral-500">© {new Date().getFullYear()} Heartfitt LLC</p>
+      <p className="mt-2 text-xs text-neutral-500">© {new Date().getFullYear()} HeartHero Fitness LLC</p>
     </footer>
   );
 };

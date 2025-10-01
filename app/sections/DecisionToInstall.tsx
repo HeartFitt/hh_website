@@ -56,9 +56,10 @@ export const timelineSteps = [
     hexIconUrl: "./02.svg",
     title: "30 Days Out",
     items: [
-      "Sneak-Peak at your club",
-      "Assess Infrastructure for rollout",
-      "1-hour training for instructors and personal trainings",
+      "Signage Hung",
+      "$60/Day Social Media Ads",
+      "Google SEO Optimization",
+      "Classes on Schedule",
     ],
   },
   {

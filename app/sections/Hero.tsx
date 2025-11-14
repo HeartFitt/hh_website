@@ -28,7 +28,7 @@ const cardContent: ProductCardContent[] = [
     },
     {
         title: "Business",
-        actionButton: <Button onClick={() => window.location.href = "/business"} label="Join Now" size="lg" variant="secondary" fillWidth={true} />,
+        actionButton: <Button onClick={() => window.location.href = "/business"} label="Join Waitlist" size="lg" variant="primary" fillWidth={true} />,
   icon: Building,
         iconColor: "var(--green-500)",
         desc: "Earn revenue by members that train from home.",

@@ -227,6 +227,23 @@ const ContactForm = () => {
       />
       </div>
 
+      <div className="grid grid-cols-2 gap-2">
+      <TextInput
+        label="Phone Number"
+        name="phoneNumber"
+        value={formData.Phone}
+        onChange={handleChange}
+        error={formErrors.Phone}
+      />
+      <TextInput
+        label="Email Address"
+        name="email"
+        value={formData.Email}
+        onChange={handleChange}
+        error={formErrors.Email}
+      />
+      </div>
+
       <TextInput
       label="Club Name"
       name="clubName"

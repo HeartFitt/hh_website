@@ -13,14 +13,14 @@ const ProductCard = ({ title, actionButton, icon: Icon, iconColor = "var(--neutr
 
     return (
         <div className="bg-neutral-800 p-4 rounded-lg flex flex-col flex-wrap w-full gap-4 justify-between">
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-4">
                 <div>
                     {Icon && React.createElement(Icon, { size: 32, color: iconColor })}
                     <h3 className="text-[2.125rem]">{title}</h3>
                 </div>
                 {children}
             </div>
-            <br className="mt-8" />
+            <br className="mt-4" />
             {actionButton}
         </div>
     );

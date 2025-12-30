@@ -49,7 +49,7 @@ export function Hero() {
         <img src="./hh_gradient.png" alt="background gradient" className="absolute z-[-1] blur-[125px] left-[50%] translate-x-[-50%] translate-y-[-50%] top-[50%]" />
         {/* <img src="./hh_bike.png" alt="background gradient" className="absolute z-[-2] left-[50%] translate-x-[-50%] bottom-0 w-[100vw] max-w-[1200px]" style={{boxShadow: "25 25 50px 50px var(--neutral-900) inset"}} /> */}
         {/* Wrapper */}
-        <div className='flex flex-col items-center gap-[6rem]'>
+        <div className='flex flex-col items-center gap-[2rem] md:gap-[6rem]'>
           {/* Title */}
           <div className="w-full align-center text-center pt-16">
             <h1 className='title-1'>

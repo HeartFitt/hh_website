@@ -16,14 +16,6 @@ const updatedDate = "December 30, 2025";
 
 const sections = [
   {
-    title: "❤️ Heart Health & Longevity: Simple, Science-Backed Tips",
-    paragraphs: [
-      "Want to live longer and feel better? Your heart might be the key — and the good news? Small, smart habits can make a big difference.",
-      "Here’s what top experts say, in plain language.",
-      `Date edited: ${updatedDate}`,
-    ],
-  },
-  {
     title: "✅ 1. NIH / National Heart, Lung, and Blood Institute (NIH/NHLBI)",
     paragraphs: [
       "Powering longevity through heart-healthy living.",

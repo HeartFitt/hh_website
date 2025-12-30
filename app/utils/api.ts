@@ -1,6 +1,6 @@
 // Minimal reusable API utilities and Lead types
 
-export type LeadType = 'Personal' | 'Business';
+export type LeadType = 'Personal' | 'Club';
 
 // Base API URL: future-friendly (env override) but hard-coded fallback per request
 // const API_BASE = (typeof import.meta !== 'undefined' && (import.meta as any).env?.VITE_API_BASE_URL) || 'http://localhost:8000';
@@ -17,9 +17,10 @@ export interface LeadCreate {
   City?: string;
   State?: string;
   Zip_Code?: string;
-  Country?: string;
   Lead_Source?: string;
   Lead_Type?: LeadType;
+  Opt_Out_SMS?: boolean;
+  Opt_Out_Email?: boolean;
   Description?: string;
 }
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Button from '~/hkit/Button';
 import { Check } from 'lucide-react';
 import { createLead, type LeadCreate } from "~/utils/api";
+import { Link } from 'react-router';
 
 const TextInput = ({ label, name, value, onChange, error }: any) => (
   <div className="mb-4">
@@ -65,22 +66,44 @@ const RadioGroup = ({ label, name, value, onChange, error }: any) => (
   </div>
 );
 
+const Checkbox = ({ label, name, checked, onChange }: any) => (
+  <div className="mb-4">
+    <label className="inline-flex items-center">
+      <input
+        type="checkbox"
+        name={name}
+        checked={checked}
+        onChange={onChange}
+        className="form-checkbox h-5 w-5 text-blue-600"
+      />
+      <span className="ml-2 text-sm">{label}</span>
+    </label>
+  </div>
+);
+
 const ContactForm = () => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     clubName: '',
-    clubAddress: '',
     memberCount: '0 - 50',
-    offersCycling: '',
+    offersCycling: false,
+    clubStreet: '',
+    clubCity: '',
+    clubState: '',
+    clubZip: '',
+    optOutSMS: false,
+    optOutEmail: false,
   });
   const [formErrors, setFormErrors] = useState({
     firstName: '',
     lastName: '',
     clubName: '',
-    clubAddress: '',
     memberCount: '',
-    offersCycling: '',
+    clubStreet: '',
+    clubCity: '',
+    clubState: '',
+    clubZip: '',
   });
   const [submitting, setSubmitting] = useState(false);
 
@@ -94,17 +117,29 @@ const ContactForm = () => {
         return value.trim() ? '' : 'Club address is required.';
       case 'memberCount':
         return value ? '' : 'Please select member count.';
-      case 'offersCycling':
-        return value ? '' : 'Please select Yes or No.';
+      case 'clubStreet':
+        return value ? '' : 'Club street is required.';
+      case 'clubCity':
+        return value ? '' : 'Club city is required.';
+      case 'clubState':
+        return value ? '' : 'Club state is required.';
+      case 'clubZip':
+        return value ? '' : 'Club zip is required.';
+      case 'clubCountry':
+        return value ? '' : 'Club country is required.';
       default:
         return '';
     }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
+    const isCheckbox = (e.target as HTMLInputElement).type === 'checkbox';
+    const { name } = e.target;
+    const value = isCheckbox ? (e.target as HTMLInputElement).checked : e.target.value;
     setFormData(prev => ({ ...prev, [name]: value }));
-    setFormErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
+    if (typeof value === 'string') {
+      setFormErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
+    }
   };
 
   const validateForm = () => {
@@ -112,9 +147,11 @@ const ContactForm = () => {
       firstName: validateField('firstName', formData.firstName),
       lastName: validateField('lastName', formData.lastName),
       clubName: validateField('clubName', formData.clubName),
-      clubAddress: validateField('clubAddress', formData.clubAddress),
+      clubStreet: validateField('clubStreet', formData.clubStreet),
+      clubCity: validateField('clubCity', formData.clubCity),
+      clubState: validateField('clubState', formData.clubState),
+      clubZip: validateField('clubZip', formData.clubZip),
       memberCount: validateField('memberCount', formData.memberCount),
-      offersCycling: validateField('offersCycling', formData.offersCycling),
     };
     setFormErrors(errors);
     return Object.values(errors).every(err => !err);
@@ -132,18 +169,23 @@ const ContactForm = () => {
       First_Name: formData.firstName,
       Last_Name: formData.lastName,
       Company: formData.clubName || undefined,
-      Street: formData.clubAddress || undefined,
+      Street: formData.clubStreet || undefined,
+      City: formData.clubCity || undefined,
+      State: formData.clubState || undefined,
+      Zip_Code: formData.clubZip || undefined,
       Lead_Source: 'Website',
-      Lead_Type: 'Business',
-      Description: `Member count: ${formData.memberCount}\nOffers cycling: ${formData.offersCycling}`,
+      Lead_Type: 'Club',
+      Description: `Member count: ${formData.memberCount}\nOffers cycling: ${formData.offersCycling ? 'Yes' : 'No'}`,
+      Opt_Out_SMS: formData.optOutSMS,
+      Opt_Out_Email: formData.optOutEmail,
     };
 
     setSubmitting(true);
     try {
       await createLead(payload);
       alert('Thanks! Your information was submitted.');
-      setFormData({ contactName: '', clubName: '', clubAddress: '', memberCount: '0 - 50', offersCycling: '' });
-      setFormErrors({ contactName: '', clubName: '', clubAddress: '', memberCount: '', offersCycling: '' });
+      setFormData({ firstName: '', lastName: '', clubName: '', clubStreet: '', clubCity: '', clubState: '', clubZip: '', memberCount: '0 - 50', offersCycling: false, optOutSMS: false, optOutEmail: false });
+      setFormErrors({ firstName: '', lastName: '', clubName: '', clubStreet: '', clubCity: '', clubState: '', clubZip: '', memberCount: ''});
     } catch (err: any) {
       const status = err?.status as number | undefined;
       if (status === 400) {
@@ -164,71 +206,180 @@ const ContactForm = () => {
     formData.firstName.trim() !== '' &&
     formData.lastName.trim() !== '' &&
     formData.clubName.trim() !== '' &&
-    formData.clubAddress.trim() !== '' &&
-    formData.offersCycling !== '';
+    formData.clubStreet.trim() !== '' &&
+    formData.clubCity.trim() !== '' &&
+    formData.clubState.trim() !== '' &&
+    formData.clubZip.trim() !== '' &&
+    true;
 
   return (
     <form onSubmit={handleSubmit} className="max-w-[50rem] mx-auto lg:p-6 p-2 text-neutral-100">
       <h2 className="text-2xl font-semibold mb-1 text-center">Let’s Chat.</h2>
       <p className="text-sm text-center mb-6">Interested in becoming a HeartHero Hub?</p>
-      <div className='grid grid-cols-2 gap-2'>
+
+      <div className="grid grid-cols-2 gap-2">
+      <TextInput
+        label="First Name"
+        name="firstName"
+        value={formData.firstName}
+        onChange={handleChange}
+        error={formErrors.firstName}
+      />
+      <TextInput
+        label="Last Name"
+        name="lastName"
+        value={formData.lastName}
+        onChange={handleChange}
+        error={formErrors.lastName}
+      />
+      </div>
+
+      <TextInput
+      label="Club Name"
+      name="clubName"
+      value={formData.clubName}
+      onChange={handleChange}
+      error={formErrors.clubName}
+      />
+
+      {/* Address fields */}
+      <TextInput
+      label="Street Address"
+      name="clubStreet"
+      value={formData.clubStreet}
+      onChange={handleChange}
+      error={formErrors.clubStreet}
+      />
+
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
         <TextInput
-          label="First Name"
-          name="firstName"
-          value={formData.firstName}
+          label="City"
+          name="clubCity"
+          value={formData.clubCity}
           onChange={handleChange}
-          error={formErrors.firstName}
+          error={formErrors.clubCity}
+        />
+        <Dropdown
+          label="State"
+          name="clubState"
+          value={formData.clubState}
+          onChange={handleChange}
+          options={[
+        '',
+        'AL',
+        'AK',
+        'AZ',
+        'AR',
+        'CA',
+        'CO',
+        'CT',
+        'DE',
+        'FL',
+        'GA',
+        'HI',
+        'ID',
+        'IL',
+        'IN',
+        'IA',
+        'KS',
+        'KY',
+        'LA',
+        'ME',
+        'MD',
+        'MA',
+        'MI',
+        'MN',
+        'MS',
+        'MO',
+        'MT',
+        'NE',
+        'NV',
+        'NH',
+        'NJ',
+        'NM',
+        'NY',
+        'NC',
+        'ND',
+        'OH',
+        'OK',
+        'OR',
+        'PA',
+        'RI',
+        'SC',
+        'SD',
+        'TN',
+        'TX',
+        'UT',
+        'VT',
+        'VA',
+        'WA',
+        'WV',
+        'WI',
+        'WY',
+          ]}
+          error={formErrors.clubState}
         />
         <TextInput
-          label="Last Name"
-          name="lastName"
-          value={formData.lastName}
+          label="ZIP / Postal Code"
+          name="clubZip"
+          value={formData.clubZip}
           onChange={handleChange}
-          error={formErrors.lastName}
+          error={formErrors.clubZip}
         />
       </div>
-      <TextInput
-        label="Club Name"
-        name="clubName"
-        value={formData.clubName}
-        onChange={handleChange}
-        error={formErrors.clubName}
-      />
-      <TextInput
-        label="Club Address"
-        name="clubAddress"
-        value={formData.clubAddress}
-        onChange={handleChange}
-        error={formErrors.clubAddress}
-      />
+
       <Dropdown
-        label="Member Count"
-        name="memberCount"
-        value={formData.memberCount}
-        onChange={handleChange}
-        options={[
-          '0 - 50',
-          '51 - 100',
-          '101 - 250',
-          '251 - 500',
-          '500+',
-        ]}
-        error={formErrors.memberCount}
+      label="Member Count"
+      name="memberCount"
+      value={formData.memberCount}
+      onChange={handleChange}
+      options={[
+        '0 - 50',
+        '51 - 100',
+        '101 - 250',
+        '251 - 500',
+        '500+',
+      ]}
+      error={formErrors.memberCount}
       />
-      <RadioGroup
+
+      {/* Offer cycling as a checkbox */}
+      <Checkbox
         label="We offer spinning / indoor cycling / cardio theatre classes"
         name="offersCycling"
-        value={formData.offersCycling}
+        checked={formData.offersCycling}
         onChange={handleChange}
-        error={formErrors.offersCycling}
+      />
+
+      {/* Privacy policy link */}
+      <div className="my-4">
+        <span className='flex gap-1'>
+          <p className="text-sm text-center">By submitting this form, you agree to our </p>
+          <Link to="/privacy-policy" target='_blank' className='underline '>Privacy Policy.</Link>
+        </span>
+      </div>
+
+      {/* Opt-out preferences */}
+      <Checkbox
+        label="Opt-out of SMS notifications"
+        name="optOutSMS"
+        checked={formData.optOutSMS}
+        onChange={handleChange}
+      />
+
+      <Checkbox
+        label="Opt-out of Email notifications"
+        name="optOutEmail"
+        checked={formData.optOutEmail}
+        onChange={handleChange}
       />
 
       <Button
-        label={submitting ? 'Submitting…' : 'Submit'}
-        onClick={handleSubmit}
-        icon={<Check />}
-        disabled={!isFormValid || submitting}
-        fillWidth
+      label={submitting ? 'Submitting…' : 'Submit'}
+      onClick={handleSubmit}
+      icon={<Check />}
+      disabled={!isFormValid || submitting}
+      fillWidth
       />
     </form>
   );

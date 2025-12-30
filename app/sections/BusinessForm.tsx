@@ -37,35 +37,6 @@ const Dropdown = ({ label, name, value, onChange, options, error }: any) => (
   </div>
 );
 
-const RadioGroup = ({ label, name, value, onChange, error }: any) => (
-  <div className="mb-6">
-    <p className="mb-2 text-sm font-medium">{label}</p>
-    <label className="mr-4">
-      <input
-        type="radio"
-        name={name}
-        value="Yes"
-        checked={value === 'Yes'}
-        onChange={onChange}
-        className="mr-1"
-      />
-      Yes
-    </label>
-    <label>
-      <input
-        type="radio"
-        name={name}
-        value="No"
-        checked={value === 'No'}
-        onChange={onChange}
-        className="mr-1"
-      />
-      No
-    </label>
-    {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
-  </div>
-);
-
 const Checkbox = ({ label, name, checked, onChange }: any) => (
   <div className="mb-4">
     <label className="inline-flex items-center">
@@ -81,10 +52,15 @@ const Checkbox = ({ label, name, checked, onChange }: any) => (
   </div>
 );
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const phoneRegex = /^\+?\d{10,15}$/; // Accepts 10-15 digits, optional +
+
 const ContactForm = () => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
+    Phone: '',
+    Email: '',
     clubName: '',
     memberCount: '0 - 50',
     offersCycling: false,
@@ -98,6 +74,8 @@ const ContactForm = () => {
   const [formErrors, setFormErrors] = useState({
     firstName: '',
     lastName: '',
+    Phone: '',
+    Email: '',
     clubName: '',
     memberCount: '',
     clubStreet: '',
@@ -109,8 +87,18 @@ const ContactForm = () => {
 
   const validateField = (name: string, value: string) => {
     switch (name) {
-      case 'contactName':
-        return value.trim() ? '' : 'Contact name is required.';
+      case 'firstName':
+        return value.trim() ? '' : 'First name is required.';
+      case 'lastName':
+        return value.trim() ? '' : 'Last name is required.';
+      case 'email':
+        if (!value.trim()) return 'Email is required.';
+        if (!emailRegex.test(value)) return 'Invalid email format.';
+        return '';
+      case 'phone':
+        if (!value.trim()) return 'Phone is required.';
+        if (!phoneRegex.test(value)) return 'Invalid phone format. Use digits only, e.g. +1234567890';
+        return '';
       case 'clubName':
         return value.trim() ? '' : 'Club name is required.';
       case 'clubAddress':
@@ -146,6 +134,8 @@ const ContactForm = () => {
     const errors: typeof formErrors = {
       firstName: validateField('firstName', formData.firstName),
       lastName: validateField('lastName', formData.lastName),
+      Phone: validateField('Phone', formData.Phone),
+      Email: validateField('Email', formData.Email),
       clubName: validateField('clubName', formData.clubName),
       clubStreet: validateField('clubStreet', formData.clubStreet),
       clubCity: validateField('clubCity', formData.clubCity),
@@ -175,7 +165,10 @@ const ContactForm = () => {
       Zip_Code: formData.clubZip || undefined,
       Lead_Source: 'Website',
       Lead_Type: 'Club',
-      Description: `Member count: ${formData.memberCount}\nOffers cycling: ${formData.offersCycling ? 'Yes' : 'No'}`,
+      Description: JSON.stringify({
+        memberCount: formData.memberCount,
+        offersCycling: formData.offersCycling,
+      }),
       Opt_Out_SMS: formData.optOutSMS,
       Opt_Out_Email: formData.optOutEmail,
     };
@@ -184,8 +177,8 @@ const ContactForm = () => {
     try {
       await createLead(payload);
       alert('Thanks! Your information was submitted.');
-      setFormData({ firstName: '', lastName: '', clubName: '', clubStreet: '', clubCity: '', clubState: '', clubZip: '', memberCount: '0 - 50', offersCycling: false, optOutSMS: false, optOutEmail: false });
-      setFormErrors({ firstName: '', lastName: '', clubName: '', clubStreet: '', clubCity: '', clubState: '', clubZip: '', memberCount: ''});
+      setFormData({ firstName: '', lastName: '', Phone: '', Email: '', clubName: '', clubStreet: '', clubCity: '', clubState: '', clubZip: '', memberCount: '0 - 50', offersCycling: false, optOutSMS: false, optOutEmail: false });
+      setFormErrors({ firstName: '', lastName: '', Phone: '', Email: '', clubName: '', clubStreet: '', clubCity: '', clubState: '', clubZip: '', memberCount: ''});
     } catch (err: any) {
       const status = err?.status as number | undefined;
       if (status === 400) {

@@ -1,5 +1,6 @@
 import { ArrowUp } from 'lucide-react';
 import React from 'react';
+import { Link } from 'react-router';
 import Button from '~/hkit/Button';
 
 const Footer: React.FC = () => {
@@ -19,6 +20,9 @@ const Footer: React.FC = () => {
       >
         ↑ Return to Top
       </Button>
+      <Link to="/privacy-policy" className="mt-4 text-sm text-neutral-400 underline">
+        Privacy Policy
+      </Link>
       <p className="mt-2 text-xs text-neutral-500">© {new Date().getFullYear()} HeartHero Fitness LLC</p>
     </footer>
   );

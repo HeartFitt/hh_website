@@ -92,10 +92,12 @@ const ContactForm = () => {
       case 'lastName':
         return value.trim() ? '' : 'Last name is required.';
       case 'email':
+      case 'Email':
         if (!value.trim()) return 'Email is required.';
         if (!emailRegex.test(value)) return 'Invalid email format.';
         return '';
       case 'phone':
+      case 'Phone':
         if (!value.trim()) return 'Phone is required.';
         if (!phoneRegex.test(value)) return 'Invalid phone format. Use digits only, e.g. +1234567890';
         return '';
@@ -158,6 +160,8 @@ const ContactForm = () => {
     const payload: LeadCreate = {
       First_Name: formData.firstName,
       Last_Name: formData.lastName,
+      Email: formData.Email || undefined,
+      Phone: formData.Phone || undefined,
       Company: formData.clubName || undefined,
       Street: formData.clubStreet || undefined,
       City: formData.clubCity || undefined,
@@ -211,37 +215,36 @@ const ContactForm = () => {
       <p className="text-sm text-center mb-6">Interested in becoming a HeartHero Hub?</p>
 
       <div className="grid grid-cols-2 gap-2">
-      <TextInput
-        label="First Name"
-        name="firstName"
-        value={formData.firstName}
-        onChange={handleChange}
-        error={formErrors.firstName}
-      />
-      <TextInput
-        label="Last Name"
-        name="lastName"
-        value={formData.lastName}
-        onChange={handleChange}
-        error={formErrors.lastName}
-      />
+        <TextInput
+          label="First Name"
+          name="firstName"
+          value={formData.firstName}
+          onChange={handleChange}
+          error={formErrors.firstName}
+        />
+        <TextInput
+          label="Last Name"
+          name="lastName"
+          value={formData.lastName}
+          onChange={handleChange}
+          error={formErrors.lastName}
+        />
       </div>
-
       <div className="grid grid-cols-2 gap-2">
-      <TextInput
-        label="Phone Number"
-        name="phoneNumber"
-        value={formData.Phone}
-        onChange={handleChange}
-        error={formErrors.Phone}
-      />
-      <TextInput
-        label="Email Address"
-        name="email"
-        value={formData.Email}
-        onChange={handleChange}
-        error={formErrors.Email}
-      />
+        <TextInput
+          label="Phone Number"
+          name="Phone"
+          value={formData.Phone}
+          onChange={handleChange}
+          error={formErrors.Phone}
+        />
+        <TextInput
+          label="Email Address"
+          name="Email"
+          value={formData.Email}
+          onChange={handleChange}
+          error={formErrors.Email}
+        />
       </div>
 
       <TextInput

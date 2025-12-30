@@ -178,7 +178,7 @@ const ContactForm = () => {
         docApproved: formData.docApproved,
         ownsStrap: formData.ownsStrap,
         goals: formData.goals,
-      }),
+      }) as string,
       Opt_Out_SMS: formData.optOutSMS,
       Opt_Out_Email: formData.optOutEmail,
     };
@@ -186,7 +186,7 @@ const ContactForm = () => {
     setSubmitting(true);
     try {
       await createLead(payload);
-      // alert('Thanks! Your information was submitted.');
+      alert('Thanks! Your information was submitted.');
       setFormData({ firstName: '', lastName: '', email: '', phone: '', goals: '', docApproved: false, ownsStrap: false, optOutSMS: false, optOutEmail: false });
       setFormErrors({ firstName: '', lastName: '', email: '', phone: '', goals: ''});
     } catch (err: any) {
@@ -199,6 +199,8 @@ const ContactForm = () => {
         alert('Unexpected error. Please try again.');
       }
       console.error(err);
+    } finally {
+      setSubmitting(false);
     }
   };
 

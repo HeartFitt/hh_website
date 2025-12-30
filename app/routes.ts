@@ -4,5 +4,6 @@ export default [
   index("routes/home.tsx"),
   route("business","routes/business.tsx"),
   route("Personal","routes/personal.tsx"),
-  route("privacy-policy","routes/privacy-policy.tsx")
+  route("privacy-policy","routes/privacy-policy.tsx"),
+  route("heart-health-longevity","routes/heart-health-longevity.tsx")
 ] satisfies RouteConfig;

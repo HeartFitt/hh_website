@@ -16,84 +16,90 @@ const sections = [
   {
     title: "Overview",
     paragraphs: [
-      "This Privacy Policy explains how HeartHero (\"we\", \"us\") collects, uses, and protects information when you visit our website and submit forms for personal waitlist or business inquiries.",
-      `Effective date: ${effectiveDate}`,
+      `This Privacy Policy describes how HeartHero ("HeartHero", "we", "our", or "us") collects, uses, and protects information about you when you visit our website, submit forms, or otherwise interact with us online.`,
     ],
   },
   {
     title: "Information We Collect",
     paragraphs: [
-      "Information you provide directly via our forms:",
-      "Personal Waitlist: first name, last name, email, phone, your fitness goals, whether a doctor has approved you to work out (self-reported), and whether you own a Bluetooth heart-rate strap. You may also set preferences to opt out of SMS or email notifications.",
-      "Business Inquiry: first name, last name, club or company name, club address, approximate member count, and whether your location offers spinning/indoor cycling/cardio theatre classes.",
-      "System information: basic technical details sent with your submission (e.g., request metadata) necessary to operate our service.",
+      "Information you provide directly, such as your name, email address, phone number, organization, role, and any details you share in our forms (e.g., waitlist signups, contact forms, or inquiries).",
+      "Information related to your fitness interests or goals that you choose to provide so we can understand how HeartHero might be a fit.",
+      "Technical information automatically collected when you use the site, such as IP address, browser type, device information, pages visited, and timestamps.",
     ],
   },
   {
     title: "How We Use Information",
     paragraphs: [
-      "Create and manage a lead in our customer relationship system to follow up on your request (personal waitlist or business inquiry).",
-      "Communicate with you regarding updates, onboarding, or partnership opportunities, respecting any opt-out choices you select for SMS or email.",
-      "Personalize product messaging based on your goals and interests.",
-      "Operate, maintain, and improve our website and forms.",
+      "To operate, maintain, and improve our website and services.",
+      "To respond to your messages, manage waitlists, and follow up on business or partnership inquiries.",
+      "To personalize certain communications and maintain business and legal records.",
+    ],
+    subSections: [
+      {
+        subtitle: "Communications",
+        paragraphs: [
+          "If you provide your email address or phone number, we may use them to send you messages about HeartHero, including waitlist updates, product information, or responses to your requests. You can unsubscribe or opt out at any time using the options in our messages or by contacting us through our website. Opting out of marketing does not stop important administrative communications.",
+        ],
+      },
+      {
+        subtitle: "SMS Campaigns",
+        paragraphs: [
+          "We will never share your opt-in to an SMS campaign with any third party for purposes unrelated to the services of that campaign.",
+          "We may share your personal data, including SMS opt-in or consent status, with trusted third parties that assist in providing our messaging services. This includes platform providers, phone companies, and other vendors necessary for message delivery.",
+          "Text messaging originator opt-in data and consent will **not** be shared with any third parties under any circumstances.",
+        ],
+      },
     ],
   },
   {
-    title: "Legal Basis",
+    title: "Cookies and Analytics",
     paragraphs: [
-      "We process your information with your consent (when you submit the form), and to take steps at your request prior to entering into a contract (e.g., responding to inquiries).",
+      "Our website may use cookies and similar technologies to remember preferences and understand how visitors use the site.",
+      "You can usually block or delete cookies through your browser settings, but this may affect how the website functions.",
     ],
   },
   {
-    title: "SMS and Email Preferences",
-    paragraphs: [
-      "The personal waitlist form allows you to opt out of SMS and/or email notifications. We honor these preferences and will not send messages through the opted-out channels.",
-    ],
-  },
-  {
-    title: "Data Sharing",
+    title: "Sharing of Information",
     paragraphs: [
       "We do not sell your personal information.",
-      "We may share information with service providers that help us operate our website and manage leads (e.g., cloud hosting and CRM providers). These providers are bound by contractual obligations to protect your data and use it only to provide services to us.",
+      "We may share information with service providers who help us operate our website, send communications, store data, or perform analytics, and with third parties when required by law or to protect our rights, users, or the public.",
     ],
   },
   {
-    title: "Data Retention",
+    title: "Data Retention and Security",
     paragraphs: [
-      "We retain information for as long as necessary to fulfill the purposes described above and to comply with legal, accounting, or reporting requirements. If you would like us to delete your information, please submit a request through our website forms.",
+      "We keep personal information only for as long as reasonably necessary for the purposes described in this Privacy Policy or as required by law.",
+      "We use reasonable technical and organizational measures to help protect your information, but no method of transmission or storage is completely secure.",
     ],
   },
   {
-    title: "Security",
+    title: "Children's Privacy",
     paragraphs: [
-      "We implement reasonable safeguards to protect the information you provide. No system is perfectly secure, and we cannot guarantee absolute security.",
+      "Our website is intended for adults and is not directed to children under 13 (or a higher age where required by law). If we learn that we have collected information from a child in violation of this policy, we will take reasonable steps to delete it.",
     ],
   },
   {
-    title: "Children",
+    title: "Your Choices and Rights",
     paragraphs: [
-      "Our website and forms are intended for adults. We do not knowingly collect information from children.",
+      "You may choose not to submit certain information, although this may limit some features or communications.",
+      "Depending on your location, you may have rights to access, correct, or delete certain personal information. If you wish to exercise these rights, please contact us.",
     ],
   },
   {
-    title: "Your Rights",
+    title: "Changes to This Privacy Policy",
     paragraphs: [
-      "Depending on your location, you may have rights to access, correct, or delete your information. To exercise these rights, contact us via the website forms and we will respond as required by applicable law.",
+      "We may update this Privacy Policy from time to time. When we make changes, we will update the effective date at the top of this page.",
+      "Your continued use of the website after changes means that you accept the updated policy.",
     ],
   },
   {
-    title: "Changes",
+    title: "Contact Us",
     paragraphs: [
-      "We may update this Privacy Policy from time to time. The updated version will be posted on this page with a revised effective date.",
-    ],
-  },
-  {
-    title: "Contact",
-    paragraphs: [
-      "To ask questions or make requests regarding this Privacy Policy, please reach out using the forms on our website.",
+      "If you have questions about this Privacy Policy or want to request changes to your information, please contact us through the forms available on our website.",
     ],
   },
 ];
+
 
 function buildPlainText(): string {
   const lines: string[] = [];
@@ -132,18 +138,29 @@ export default function PrivacyPolicy() {
       <div className="flex flex-col gap-8">
         {sections.map((sec) => (
           <section key={sec.title}>
-            <h3 className="mb-2">{sec.title}</h3>
+            <h2 className="mb-2">{sec.title}</h2>
             {sec.paragraphs.map((para, i) => (
-              <p key={i} className="text-neutral-200 mb-3">
-                {para}
-              </p>
+              <p key={i} className="text-neutral-200 mb-3">{para}</p>
+            ))}
+            {sec.subSections?.map((sub, j) => (
+              <div key={j} className="ml-4 mb-4">
+                <h3 className="mb-1 text-neutral-300">{sub.subtitle}</h3>
+                {sub.paragraphs.map((p, k) => (
+                  <p key={k} className="text-neutral-200 mb-2">{p}</p>
+                ))}
+              </div>
             ))}
           </section>
         ))}
       </div>
 
       <div className="mt-10">
-        <Button label="Download Privacy Policy" onClick={handleDownload} icon={<Download />} fillWidth />
+        <Button
+          label="Download Privacy Policy"
+          onClick={handleDownload}
+          icon={<Download />}
+          fillWidth
+        />
       </div>
       <br className="py-[10rem]" />
     </div>

@@ -3,97 +3,7 @@ import Button from '~/hkit/Button';
 import { Check } from 'lucide-react';
 import { createLead, type LeadCreate } from "~/utils/api";
 import { Link } from 'react-router';
-
-const TextAreaField = ({ label, name, value, onChange, error, rows = 4 }: any) => (
-  <div className="mb-4">
-    <label className="block mb-1 text-sm font-medium">{label}</label>
-    <textarea
-      name={name}
-      value={value}
-      onChange={onChange}
-      rows={rows}
-      className={`w-full rounded-md bg-neutral-800 text-neutral-100 p-2 border ${error ? 'border-red-500 focus:ring-red-500' : 'border-neutral-700 focus:ring-neutral-100'} focus:outline-none focus:ring-2 resize-none`}
-    />
-    {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
-  </div>
-);
-
-const TextInput = ({ label, name, type = 'text', value, onChange, error }: any) => (
-  <div className="mb-4">
-    <label className="block mb-1 text-sm font-medium w-full">{label}</label>
-    <input
-      type={type}
-      name={name}
-      value={value}
-      onChange={onChange}
-      className={`w-full rounded-md bg-neutral-800 text-neutral-100 p-2 border ${error ? 'border-red-500 focus:ring-red-500' : 'border-neutral-700 focus:ring-neutral-100'} focus:outline-none focus:ring-2`}
-    />
-    {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
-  </div>
-);
-
-const Dropdown = ({ label, name, value, onChange, options, error }: any) => (
-  <div className="mb-4">
-    <label className="block mb-1 text-sm font-medium">{label}</label>
-    <select
-      name={name}
-      value={value}
-      onChange={onChange}
-      className={`w-full rounded-md bg-neutral-800 text-neutral-100 p-2 border ${error ? 'border-red-500 focus:ring-red-500' : 'border-neutral-700 focus:ring-neutral-100'} focus:outline-none focus:ring-2`}
-    >
-      {options.map((opt: string) => (
-        <option key={opt} value={opt}>
-          {opt}
-        </option>
-      ))}
-    </select>
-    {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
-  </div>
-);
-
-const RadioGroup = ({ label, name, value, onChange, error }: any) => (
-  <div className="mb-6">
-    <p className="mb-2 text-sm font-medium">{label}</p>
-    <label className="mr-4">
-      <input
-        type="radio"
-        name={name}
-        value="Yes"
-        checked={value === 'Yes'}
-        onChange={onChange}
-        className="mr-1"
-      />
-      Yes
-    </label>
-    <label>
-      <input
-        type="radio"
-        name={name}
-        value="No"
-        checked={value === 'No'}
-        onChange={onChange}
-        className="mr-1"
-      />
-      No
-    </label>
-    {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
-  </div>
-);
-
-const Checkbox = ({ label, name, checked, onChange, error }: any) => (
-  <div className="mb-4">
-    <label className="inline-flex items-center">
-      <input
-        type="checkbox"
-        name={name}
-        checked={checked}
-        onChange={onChange}
-        className="form-checkbox h-5 w-5 text-blue-600"
-      />
-      <span className="ml-2 text-sm">{label}</span>
-    </label>
-  </div>
-);
+import { TextAreaField, TextInput, Checkbox } from "~/components/FormFields";
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phoneRegex = /^\+?\d{10,15}$/; // Accepts 10-15 digits, optional +
@@ -109,6 +19,7 @@ const ContactForm = () => {
     ownsStrap: false,
     optOutSMS: false,
     optOutEmail: false,
+    termsAccepted: false,
   });
   const [formErrors, setFormErrors] = useState({
     firstName: '',
@@ -134,7 +45,7 @@ const ContactForm = () => {
         if (!phoneRegex.test(value)) return 'Invalid phone format. Use digits only, e.g. +1234567890';
         return '';
       case 'goals':
-        return value.trim() ? '' : 'Please describe your goals.';
+        return '';
       default:
         return '';
     }
@@ -187,7 +98,7 @@ const ContactForm = () => {
     try {
       await createLead(payload);
       alert('Thanks! Your information was submitted.');
-      setFormData({ firstName: '', lastName: '', email: '', phone: '', goals: '', docApproved: false, ownsStrap: false, optOutSMS: false, optOutEmail: false });
+      setFormData({ firstName: '', lastName: '', email: '', phone: '', goals: '', docApproved: false, ownsStrap: false, optOutSMS: false, optOutEmail: false, termsAccepted: false });
       setFormErrors({ firstName: '', lastName: '', email: '', phone: '', goals: ''});
     } catch (err: any) {
       const status = err?.status as number | undefined;
@@ -204,10 +115,12 @@ const ContactForm = () => {
     }
   };
 
-  const isFormValid = Object.values(formErrors).every(err => !err) &&
-    Object.values(formData).every(val =>
-      typeof val === 'string' ? val.trim() !== '' : true
-    );
+  const isFormValid =
+    Object.values(formErrors).every(err => !err) &&
+    formData.firstName.trim() !== '' &&
+    formData.lastName.trim() !== '' &&
+    formData.email.trim() !== '' &&
+    formData.phone.trim() !== '';
 
   return (
     <form onSubmit={handleSubmit} className="max-w-[50rem] mx-auto lg:p-6 p-2 text-neutral-100">
@@ -215,20 +128,22 @@ const ContactForm = () => {
       <p className="text-sm text-center mb-6">Help us personalize your fitness journey by answering a few questions</p>
 
       <div className='grid grid-cols-2 gap-2 justify-stretch'>
-        <TextInput
-          label="First Name"
-          name="firstName"
-          value={formData.firstName}
-          onChange={handleChange}
-          error={formErrors.firstName}
-        />
-        <TextInput
-          label="Last Name"
-          name="lastName"
-          value={formData.lastName}
-          onChange={handleChange}
-          error={formErrors.lastName}
-        />
+      <TextInput
+        label="First Name"
+        name="firstName"
+        value={formData.firstName}
+        onChange={handleChange}
+        error={formErrors.firstName}
+        required
+      />
+      <TextInput
+        label="Last Name"
+        name="lastName"
+        value={formData.lastName}
+        onChange={handleChange}
+        error={formErrors.lastName}
+        required
+      />
       </div>
       <TextInput
         label="Email"
@@ -236,27 +151,29 @@ const ContactForm = () => {
         value={formData.email}
         onChange={handleChange}
         error={formErrors.email}
+        required
       />
       <TextInput
-        type="phone"
-        label="Phone"
-        name="phone"
-        value={formData.phone}
-        onChange={handleChange}
-        error={formErrors.phone}
+      type="phone"
+      label="Phone"
+      name="phone"
+      value={formData.phone}
+      onChange={handleChange}
+      error={formErrors.phone}
+      required
       />
 
       <Checkbox
-        label="Doctor has approved me to workout"
-        name="docApproved"
-        checked={formData.docApproved}
-        onChange={handleChange}
+      label="Doctor has approved me to workout"
+      name="docApproved"
+      checked={formData.docApproved}
+      onChange={handleChange}
       />
       <Checkbox
-        label="I own a Bluetooth HR strap"
-        name="ownsStrap"
-        checked={formData.ownsStrap}
-        onChange={handleChange}
+      label="I own a Bluetooth HR strap"
+      name="ownsStrap"
+      checked={formData.ownsStrap}
+      onChange={handleChange}
       />
 
       <TextAreaField
@@ -267,35 +184,51 @@ const ContactForm = () => {
         error={formErrors.goals}
       />
 
-      <div className="my-4">
-        <span className='flex gap-1'>
-          <p className="text-sm text-center">By submitting this form, you agree to our </p>
-          <Link to="/privacy-policy" target='_blank' className='underline '>Privacy Policy.</Link>
-        </span>
-      </div>
-
+      {/* Required agreement checkbox with inline Privacy Policy link */}
       <Checkbox
+      required
+      label={
+        <>
+        By clicking here, you consent to receive Customer Care and Account Notification SMS from HeartHero Fitness.
+        Message frequency may vary. Standard Message and Data Rates may apply. Reply STOP to opt out. Reply HELP
+        for help. See our{" "}
+        <Link to="/privacy-policy" target="_blank" className="underline">
+          Privacy Policy
+        </Link>
+        .
+        </>
+      }
+      name="termsAccepted"
+      checked={formData.termsAccepted}
+      onChange={handleChange}
+      />
+
+      {/* Only show these once the required agreement is checked */}
+      {formData.termsAccepted && (
+      <div className='ml-10'>
+        <Checkbox
         label="Opt-out of SMS notifications"
         name="optOutSMS"
         checked={formData.optOutSMS}
         onChange={handleChange}
-      />
+        />
 
-      <Checkbox
+        <Checkbox
         label="Opt-out of Email notifications"
         name="optOutEmail"
         checked={formData.optOutEmail}
         onChange={handleChange}
-      />
+        />
+      </div>
+      )}
 
       <Button
-        label={submitting ? 'Submitting…' : 'Submit'}
-        onClick={handleSubmit}
-        icon={<Check />}
-        disabled={!isFormValid || submitting}
-        fillWidth
+      label={submitting ? 'Submitting…' : 'Submit'}
+      onClick={handleSubmit}
+      icon={<Check />}
+      disabled={!isFormValid || submitting || !formData.termsAccepted}
+      fillWidth
       />
-
     </form>
   );
 };

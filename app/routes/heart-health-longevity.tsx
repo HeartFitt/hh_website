@@ -16,7 +16,7 @@ const updatedDate = "December 30, 2025";
 
 const sections = [
   {
-    title: "✅ 1. NIH / National Heart, Lung, and Blood Institute (NIH/NHLBI)",
+    title: "1. NIH / National Heart, Lung, and Blood Institute (NIH/NHLBI)",
     paragraphs: [
       "Powering longevity through heart-healthy living.",
     ],
@@ -29,7 +29,7 @@ const sections = [
     footer: "NHLBI, NIH",
   },
   {
-    title: "✅ 2. American Heart Association (AHA)",
+    title: "2. American Heart Association (AHA)",
     paragraphs: [
       "Life’s Essential 8 – The 8 key metrics for heart health.",
     ],
@@ -50,7 +50,7 @@ const sections = [
     footer: "www.heart.org",
   },
   {
-    title: "✅ 3. Harvard T.H. Chan School of Public Health",
+    title: "3. Harvard T.H. Chan School of Public Health",
     paragraphs: [
       "Extra exercise may lead to a longer life.",
     ],
@@ -63,11 +63,15 @@ const sections = [
         label: "Harvard Public Health update",
         to: "https://hsph.harvard.edu/news/exercising-more-than-recommended-could-lengthen-life-study-suggests/",
       },
+      {
+        label: "Harvard Study of Adult Development",
+        to: "https://adultdevelopment.hsph.harvard.edu/"
+      }
     ],
     footer: "Harvard Health & Harvard Public Health",
   },
   {
-    title: "✅ 4. Cardiorespiratory Fitness & Longevity Studies",
+    title: "4. Cardiorespiratory Fitness & Longevity Studies",
     paragraphs: [
       "How fit you are affects how long you live.",
     ],
